@@ -13,14 +13,14 @@ import lombok.Setter;
 @Getter
 public class BookDTO {
 	
-	private long Book_ID;
-	private String Title;
-	private String Author;
-	private String Subject;
+	private long bookId;
+	private String title;
+	private String author;
+	private String subject;
 	private String ISBN;
-	private String Publisher;
-	private LocalDate Date;
-	private int Quantity;
-	private int Available_Quantity;
+	private String publisher;
+	private LocalDate date;
+	private int quantity;
+	private int availableQuantity;
 
 }

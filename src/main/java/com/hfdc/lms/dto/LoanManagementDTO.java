@@ -13,10 +13,10 @@ import lombok.Setter;
 @Getter
 public class LoanManagementDTO {
 	
-	private long Loan_ID;
-	private long User_ID; //(Foreign Key)
-	private long Book_ID; //(Foreign Key)
-	private LocalDate Due_Date;
-	private Double Fine;
+	private long loanId;
+	private long userId; //(Foreign Key)
+	private long bookId; //(Foreign Key)
+	private LocalDate dueDate;
+	private Double fine;
 
 }

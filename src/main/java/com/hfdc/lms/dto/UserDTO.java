@@ -11,11 +11,11 @@ import lombok.Setter;
 @Getter
 public class UserDTO {
 
-	private long User_Id;
-	private String First_Name;
-	private String Last_Name;
-	private String Email;
-	private String Password;
-	private String Account_Status;
+	private long userId;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String password;
+	private String accountStatus;
 
 }

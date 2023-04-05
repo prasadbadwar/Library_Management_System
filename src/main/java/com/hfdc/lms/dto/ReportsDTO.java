@@ -11,9 +11,9 @@ import lombok.Setter;
 @Getter
 public class ReportsDTO {
 	
-	private long Report_ID;
-	private String User_Activity;
-	private String Book_Status;
-	private Double Fines_Collected;
+	private long reportId;
+	private String userActivity;
+	private String bookStatus;
+	private Double finesCollected;
 
 }

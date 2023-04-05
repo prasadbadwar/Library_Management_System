@@ -13,9 +13,9 @@ import lombok.Setter;
 @Getter
 public class ReservationDTO {
 	
-	private long Reservation_ID;
-	private long User_ID;// (Foreign Key)
-	private long Book_ID; //(Foreign Key)
-	private LocalDate Reservation_Date;
+	private long reservationId;
+	private long userId;// (Foreign Key)
+	private long bookId; //(Foreign Key)
+	private LocalDate reservationDate;
 
 }

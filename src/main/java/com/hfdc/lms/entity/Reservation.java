@@ -2,6 +2,10 @@ package com.hfdc.lms.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +15,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
+
+@Entity
 public class Reservation {
 	
-	private long Reservation_ID;
-	private long User_ID;// (Foreign Key)
-	private long Book_ID; //(Foreign Key)
-	private LocalDate Reservation_Date;
+	@Id
+	@Column(name="reservation_id")
+	private long reservationId;
+	
+	@Column(name="user_id")
+	private long userId;// (Foreign Key)
+	
+	@Column(name="book_id")
+	private long bookId; //(Foreign Key)
+	
+	@Column(name="reservation_date")
+	private LocalDate reservationDate;
 
 }
