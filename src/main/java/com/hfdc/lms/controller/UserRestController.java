@@ -33,8 +33,9 @@ public class UserRestController {
 	}
 	
 	@PutMapping("/updateuser")
-	public User updateUser(@RequestBody UserDTO userDTO) {
-		return service.updateUser(userDTO);
+	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
+		service.updateUser(userDTO);
+		return new ResponseEntity<String>("User Updated Successfully!!",HttpStatus.OK);
 	}
 	
 	@GetMapping("/getusers")
