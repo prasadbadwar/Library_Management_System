@@ -3,6 +3,7 @@ package com.hfdc.lms.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Getter
 
 @Entity
+@Table(name = "users")
 public class User {
 
 	@Id
