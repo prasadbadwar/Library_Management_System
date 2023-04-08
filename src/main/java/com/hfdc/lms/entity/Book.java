@@ -2,9 +2,13 @@ package com.hfdc.lms.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,10 +39,13 @@ public class Book {
 	private String publisher;
 	
 	private LocalDate date;
-	
+
 	private int quantity;
 	
 	@Column(name="available_quantity")
 	private int availableQuantity;
+	
+	@OneToOne(mappedBy ="book",fetch = FetchType.LAZY )
+	private Borrowing borrow;
 
 }

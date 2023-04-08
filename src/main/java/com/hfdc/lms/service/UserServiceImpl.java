@@ -17,7 +17,11 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	IUserRepository userrepo;
 	@Override
-	public User addUser(UserDTO userDTO) {
+	public User addUser(UserDTO userDTO) throws UserNotFound {
+		if(userrepo.existsById(userDTO.getUserId())) {
+			throw new UserNotFound("User Already Exist!");
+			
+		}
 		User user=new User();
 		user.setAccountStatus(userDTO.getAccountStatus());
 		user.setEmail(userDTO.getEmail());
@@ -30,7 +34,10 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User updateUser(UserDTO userDTO) {
+	public User updateUser(UserDTO userDTO) throws UserNotFound {
+		if(!userrepo.existsById(userDTO.getUserId())) {
+			throw new UserNotFound("Oops...Sorry,User not found");
+		}
 		User user=new User();
 		user.setAccountStatus(userDTO.getAccountStatus());
 		user.setEmail(userDTO.getEmail());
@@ -52,11 +59,19 @@ public class UserServiceImpl implements IUserService {
 	public void deleteUser(long userId) throws UserNotFound {
 
 		if(!userrepo.existsById(userId)) {
-			throw new UserNotFound();
+			throw new UserNotFound("Oops...Sorry,User not found");
 		}
 		
 		userrepo.deleteById(userId);
 
+	}
+
+	@Override
+	public User getUserID(long userId) throws UserNotFound {
+		if(!userrepo.existsById(userId)) {
+			throw new UserNotFound("Oops...Sorry,User not found");
+		}
+		return userrepo.findById(userId).orElse(null);
 	}
 
 }

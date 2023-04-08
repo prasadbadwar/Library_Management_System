@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +27,13 @@ public class Borrowing {
 	@Column(name="borrowing_id")
 	private long borrowingId;
 	
-	@Column(name="user_id")
-	private long userId;// (Foreign Key)
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;			// (Foreign Key)
 	
-	@Column(name="book_id")
-	private long bookId;// (Foreign Key)
+	@OneToOne
+	@JoinColumn(name="book_id")
+	private Book book;			// (Foreign Key)
 	
 	@Column(name="borrow_date")
 	private LocalDate borrowDate;
@@ -40,4 +45,6 @@ public class Borrowing {
 	private Date returnDate;
 	
 	private String status; // (Borrowed/Returned)
+
+
 }

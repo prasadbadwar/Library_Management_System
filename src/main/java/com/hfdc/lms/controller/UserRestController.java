@@ -27,13 +27,13 @@ public class UserRestController {
 	IUserService service;
 	
 	@PostMapping("/adduser")
-	public ResponseEntity<String> addUser(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<String> addUser(@RequestBody UserDTO userDTO) throws UserNotFound {
 		service.addUser(userDTO);
 		return new ResponseEntity<String>("User Added Successfully!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateuser")
-	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO)throws UserNotFound {
 		service.updateUser(userDTO);
 		return new ResponseEntity<String>("User Updated Successfully!!",HttpStatus.OK);
 	}
@@ -48,5 +48,10 @@ public class UserRestController {
 	public ResponseEntity<String> deleteUser(@PathVariable long userId) throws UserNotFound{
 		service.deleteUser(userId);
 		return new ResponseEntity<String>("User Deleted Successfully!!!",HttpStatus.OK);
+	}
+	
+	@GetMapping("/getuserid/{userId}")
+	public User getUser(@PathVariable long userId) throws UserNotFound{
+		return service.getUserID(userId);
 	}
 }

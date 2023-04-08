@@ -8,9 +8,11 @@ import com.hfdc.lms.exception.UserNotFound;
 
 public interface IUserService {
 
-	public User addUser(UserDTO userDTO);
+	public User addUser(UserDTO userDTO) throws UserNotFound;
 	
-	public User updateUser(UserDTO userDTO);
+	public User updateUser(UserDTO userDTO) throws UserNotFound;
+	
+	public User getUserID(long userId) throws UserNotFound;
 	
 	public List<User> getUser();
 	

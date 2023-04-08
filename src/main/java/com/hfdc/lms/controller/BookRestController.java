@@ -27,13 +27,15 @@ public class BookRestController {
 	IBookService service;
 	
 	@PostMapping("/addbook")
-	public Book addBook(@RequestBody BookDTO bookDTO) {
-		return service.addBook(bookDTO); 	
+	public ResponseEntity<String> addBook(@RequestBody BookDTO bookDTO) throws BookNotFound {
+		service.addBook(bookDTO); 
+		return new ResponseEntity<String>("Book Added Successfully!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updatebook")
-	public Book updateBook(@RequestBody BookDTO bookDTO) {
-		return service.updateBook(bookDTO);
+	public ResponseEntity<String> updateBook(@RequestBody BookDTO bookDTO) throws BookNotFound {
+		 service.updateBook(bookDTO);
+		 return new ResponseEntity<String>("Book Updated Successfully!!",HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/deletebook/{bookId}")
@@ -46,7 +48,7 @@ public class BookRestController {
 	public ResponseEntity<List<Book>> findByTitle(@PathVariable String title) throws BookNotFound{
 		List list=service.findByTitle(title);
 		if(list.isEmpty()) {
-			throw new BookNotFound();
+			throw new BookNotFound("Oops...Sorry,Book not found");
 		}
 		return new ResponseEntity<List<Book>>(list,HttpStatus.OK);
 	}
@@ -55,7 +57,7 @@ public class BookRestController {
 	public List<Book> findByAuthor(@PathVariable String author) throws BookNotFound{
 		List list=service.findByAuthor(author);
 		if(list.isEmpty()) {
-			throw new BookNotFound();
+			throw new BookNotFound("Oops...Sorry,Book not found");
 		}
 		return list;
 		
@@ -65,7 +67,7 @@ public class BookRestController {
 	public List<Book> findBySubject(@PathVariable String subject) throws BookNotFound{
 		List list= service.findBySubject(subject);
 		if(list.isEmpty()) {
-			throw new BookNotFound();
+			throw new BookNotFound("Oops...Sorry,No Book not found with Subject "+subject);
 		}
 		return list;
 	}
@@ -73,5 +75,14 @@ public class BookRestController {
 	@GetMapping("/getbooks")
 	public List<Book> getBooks(){
 		return service.getBooks();
+	}
+	
+	@GetMapping("/getbyTAS/{query}")
+	public List<Book> findByTAS(@PathVariable String query) throws BookNotFound{
+		List list= service.findByTAS(query);
+		if(list.isEmpty()) {
+			throw new BookNotFound("Oops...Sorry,No Book not found with "+query);
+		}
+		return list;
 	}
 }

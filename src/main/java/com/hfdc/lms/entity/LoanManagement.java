@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,10 @@ public class LoanManagement {
 	private long loanId;
 	
 	@Column(name="user_id")
-	private long userId; //(Foreign Key)
+	private String userId; //(Foreign Key)
 	
 	@Column(name="book_id")
-	private long bookId; //(Foreign Key)
+	private String bookId; //(Foreign Key)
 	
 	@Column(name="due_date")
 	private LocalDate dueDate;

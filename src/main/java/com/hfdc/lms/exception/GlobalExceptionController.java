@@ -10,12 +10,17 @@ public class GlobalExceptionController {
 	
 	@ExceptionHandler(BookNotFound.class)
 	public ResponseEntity<String> handleBookExp(BookNotFound e){
-		return new ResponseEntity<String>("Oops...Sorry, Book not found "+e.getMessage(),HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 	}
 	
 
 	@ExceptionHandler(UserNotFound.class)
 	public ResponseEntity<String> handleUserExp(UserNotFound e){
-		return new ResponseEntity<String>("Oops...Sorry, User not found "+e.getMessage(),HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(NotFoundExp.class)
+	public ResponseEntity<String> handleBorrowerExp(NotFoundExp e){
+		return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 	}
 }
