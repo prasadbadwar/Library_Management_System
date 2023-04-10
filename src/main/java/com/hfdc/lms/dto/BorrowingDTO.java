@@ -19,7 +19,7 @@ public class BorrowingDTO {
 	private long bookId;// (Foreign Key)
 	private LocalDate borrowDate;
 	private LocalDate dueDate;
-	private Date returnDate;
+	private LocalDate returnDate;
 	private String status; // (Borrowed/Returned)
 
 }

@@ -1,15 +1,17 @@
 package com.hfdc.lms.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,11 +42,12 @@ public class User {
 	
 	private String password;
 	
+	
 	@Column(name="account_status")
 	private String accountStatus;
 	
-	@OneToOne(mappedBy ="user",fetch = FetchType.LAZY)
-	private Borrowing borrow;
+//	@OneToMany(mappedBy ="user",cascade = CascadeType.ALL)
+//	private Borrowing borrow;
 	
 	
 	

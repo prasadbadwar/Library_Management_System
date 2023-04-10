@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,11 +25,13 @@ public class Reservation {
 	@Column(name="reservation_id")
 	private long reservationId;
 	
-	@Column(name="user_id")
-	private long userId;// (Foreign Key)
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User userId;// (Foreign Key)
 	
-	@Column(name="book_id")
-	private long bookId; //(Foreign Key)
+	@OneToOne
+	@JoinColumn(name="book_id")
+	private Book bookId; //(Foreign Key)
 	
 	@Column(name="reservation_date")
 	private LocalDate reservationDate;

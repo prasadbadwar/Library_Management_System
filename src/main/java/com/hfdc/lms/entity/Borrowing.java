@@ -1,13 +1,11 @@
 package com.hfdc.lms.entity;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +26,7 @@ public class Borrowing {
 	private long borrowingId;
 	
 	@OneToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="user_id") //or can use maped by user_id
 	private User user;			// (Foreign Key)
 	
 	@OneToOne
@@ -42,7 +40,8 @@ public class Borrowing {
 	private LocalDate dueDate;
 	
 	@Column(name="return_date")
-	private Date returnDate;
+	private LocalDate returnDate;
+	
 	
 	private String status; // (Borrowed/Returned)
 

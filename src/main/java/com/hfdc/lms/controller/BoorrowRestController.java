@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hfdc.lms.dto.BorrowingDTO;
 import com.hfdc.lms.entity.Borrowing;
+import com.hfdc.lms.entity.LoanManagement;
 import com.hfdc.lms.exception.BookNotFound;
 import com.hfdc.lms.exception.NotFoundExp;
 import com.hfdc.lms.exception.UserNotFound;
 import com.hfdc.lms.service.IBorrowingService;
+import com.hfdc.lms.service.ILoanManagementService;
 
 @RestController
 @RequestMapping("/lms/borrow")
@@ -25,6 +27,9 @@ public class BoorrowRestController {
 
 	@Autowired
 	IBorrowingService service;
+	
+	@Autowired
+	ILoanManagementService loanservice;
 	
 	@PostMapping("/boorrowbook")
 	public ResponseEntity<String> addBorrower(@RequestBody BorrowingDTO borrowDTO) throws NotFoundExp, UserNotFound,BookNotFound{
@@ -35,13 +40,18 @@ public class BoorrowRestController {
 	@PutMapping("/returnbook")
 	public ResponseEntity<String> updateBorrower(@RequestBody BorrowingDTO borrowDTO) throws NotFoundExp, UserNotFound,BookNotFound{
 		service.updateBorrower(borrowDTO);
-		
-		return new ResponseEntity<String>("User Returned Book Successfully!!",HttpStatus.OK);
+		String message=service.display();
+		return new ResponseEntity<String>("User Returned Book Successfully!!"+message,HttpStatus.OK);
 		
 	}
 	
 	@GetMapping("/getBorrowers")
 	public List<Borrowing> getData() {
 		return service.getBorrower();
+	}
+	
+	@GetMapping("/getloandata")
+	public List<LoanManagement> getLoanData() {
+		return loanservice.getLoanData();
 	}
 }

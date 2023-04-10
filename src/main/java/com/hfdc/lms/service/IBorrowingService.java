@@ -18,5 +18,7 @@ public interface IBorrowingService {
 	
 	public Borrowing getBorrowerId(long borrowingId) throws NotFoundExp;
 	
+	public String display();
+	
 	
 }

@@ -32,7 +32,7 @@ public class BookServiceImpl implements IBookService {
 		book.setPublisher(bookDTO.getPublisher());
 		book.setDate(bookDTO.getDate());
 		book.setQuantity(bookDTO.getQuantity());
-		book.setAvailableQuantity(book.getAvailableQuantity());
+		book.setAvailableQuantity(bookDTO.getAvailableQuantity());
 		
 		return bookrepo.save(book); 
 	}
@@ -52,7 +52,7 @@ public class BookServiceImpl implements IBookService {
 		book.setPublisher(bookDTO.getPublisher());
 		book.setDate(bookDTO.getDate());
 		book.setQuantity(bookDTO.getQuantity());
-		book.setAvailableQuantity(book.getAvailableQuantity());
+		book.setAvailableQuantity(bookDTO.getAvailableQuantity());
 		
 		return bookrepo.save(book); 
 	}

@@ -1,13 +1,13 @@
 package com.hfdc.lms.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -45,7 +45,7 @@ public class Book {
 	@Column(name="available_quantity")
 	private int availableQuantity;
 	
-	@OneToOne(mappedBy ="book",fetch = FetchType.LAZY )
-	private Borrowing borrow;
+//	@OneToOne(mappedBy ="book",cascade = CascadeType.ALL )
+//	private Borrowing borrow;
 
 }

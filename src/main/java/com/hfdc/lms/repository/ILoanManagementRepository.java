@@ -8,4 +8,5 @@ import com.hfdc.lms.entity.LoanManagement;
 @Repository
 public interface ILoanManagementRepository extends JpaRepository<LoanManagement, Long> {
 
+	
 }
