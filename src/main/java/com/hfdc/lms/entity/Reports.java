@@ -3,6 +3,8 @@ package com.hfdc.lms.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,11 +23,13 @@ public class Reports {
 	@Column(name="report_id")
 	private long reportId;
 	
-	@Column(name="user_activity")
-	private String userActivity;
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
-	@Column(name="book_status")
-	private String bookStatus;
+	@OneToOne
+	@JoinColumn(name="book_id")
+	private Book book;
 	
 	@Column(name="fines_collected")
 	private Double finesCollected;

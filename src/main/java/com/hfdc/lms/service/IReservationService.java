@@ -10,7 +10,7 @@ import com.hfdc.lms.exception.UserNotFound;
 
 public interface IReservationService {
 
-	public Reservation ReserveBook(ReservationDTO reserveDTO) throws UserNotFound,BookNotFound;
+	public Reservation ReserveBook(ReservationDTO reserveDTO) throws UserNotFound,BookNotFound, NotFoundExp;
 	
 	public Reservation updateReservation(ReservationDTO reserveDTO) throws UserNotFound,BookNotFound,NotFoundExp ;
 	

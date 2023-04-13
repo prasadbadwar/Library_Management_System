@@ -8,4 +8,5 @@ import com.hfdc.lms.entity.Reservation;
 @Repository
 public interface IReservationRepository extends JpaRepository<Reservation, Long> {
 
+	
 }

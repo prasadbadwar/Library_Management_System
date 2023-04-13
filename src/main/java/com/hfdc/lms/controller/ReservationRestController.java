@@ -29,7 +29,7 @@ public class ReservationRestController {
 	IReservationService service;
 	
 	@PostMapping("/reservebook")
-	public ResponseEntity<String> ReserveBook(@RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound{
+	public ResponseEntity<String> ReserveBook(@RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound, NotFoundExp{
 		service.ReserveBook(reserveDTO);
 		return new ResponseEntity<String>("Book Reserved !!!",HttpStatus.OK);
 	}

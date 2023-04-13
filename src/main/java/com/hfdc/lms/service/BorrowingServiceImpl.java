@@ -15,6 +15,7 @@ import com.hfdc.lms.exception.NotFoundExp;
 import com.hfdc.lms.exception.UserNotFound;
 import com.hfdc.lms.repository.IBorrowingRepository;
 import com.hfdc.lms.repository.ILoanManagementRepository;
+import com.hfdc.lms.repository.IReservationRepository;
 
 @Service
 public class BorrowingServiceImpl implements IBorrowingService {
@@ -31,6 +32,11 @@ public class BorrowingServiceImpl implements IBorrowingService {
 	@Autowired
 	ILoanManagementRepository loanrepo;
 	
+	@Autowired
+	IReservationRepository resrepo;
+	
+	@Autowired
+	IReservationService resservice;
 	
 	String message;
 	@Override
@@ -46,6 +52,10 @@ public class BorrowingServiceImpl implements IBorrowingService {
 		if(!(book.getAvailableQuantity()>=1)) {
 			throw new NotFoundExp("Oops...Sorry, Currently this Book is not available...");
 		}
+		else if(resrepo.existsById(borrowDTO.getBookId()) && book.getAvailableQuantity()<=1) {
+			throw new NotFoundExp("Oops...Sorry,Book is reserved for someone...");
+		}
+		
 		borrow.setBorrowingId(borrowDTO.getBorrowingId());
 		borrow.setBorrowDate(borrowDTO.getBorrowDate());
 		borrow.setDueDate(borrowDTO.getDueDate());
