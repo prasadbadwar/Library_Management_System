@@ -2,6 +2,8 @@ package com.hfdc.lms.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +29,13 @@ public class UserRestController {
 	IUserService service;
 	
 	@PostMapping("/adduser")
-	public ResponseEntity<String> addUser(@RequestBody UserDTO userDTO) throws UserNotFound {
+	public ResponseEntity<String> addUser(@Valid @RequestBody UserDTO userDTO) throws UserNotFound {
 		service.addUser(userDTO);
 		return new ResponseEntity<String>("User Added Successfully!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateuser")
-	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO)throws UserNotFound {
+	public ResponseEntity<String> updateUser(@Valid @RequestBody UserDTO userDTO)throws UserNotFound {
 		service.updateUser(userDTO);
 		return new ResponseEntity<String>("User Updated Successfully!!",HttpStatus.OK);
 	}

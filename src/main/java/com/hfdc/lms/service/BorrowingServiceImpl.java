@@ -9,12 +9,14 @@ import com.hfdc.lms.dto.BorrowingDTO;
 import com.hfdc.lms.entity.Book;
 import com.hfdc.lms.entity.Borrowing;
 import com.hfdc.lms.entity.LoanManagement;
+import com.hfdc.lms.entity.Reports;
 import com.hfdc.lms.entity.User;
 import com.hfdc.lms.exception.BookNotFound;
 import com.hfdc.lms.exception.NotFoundExp;
 import com.hfdc.lms.exception.UserNotFound;
 import com.hfdc.lms.repository.IBorrowingRepository;
 import com.hfdc.lms.repository.ILoanManagementRepository;
+import com.hfdc.lms.repository.IReportsRepository;
 import com.hfdc.lms.repository.IReservationRepository;
 
 @Service
@@ -38,6 +40,9 @@ public class BorrowingServiceImpl implements IBorrowingService {
 	@Autowired
 	IReservationService resservice;
 	
+	@Autowired
+	IReportsRepository reportrepo;
+	
 	String message;
 	@Override
 	public Borrowing addBorrower(BorrowingDTO borrowDTO) throws UserNotFound, BookNotFound, NotFoundExp {
@@ -46,16 +51,22 @@ public class BorrowingServiceImpl implements IBorrowingService {
 		}
 		User user=userservice.getUserID(borrowDTO.getUserId());
 		
-		Book book=bookservice.getBookID(borrowDTO.getBookId());
+		Book book=bookservice.getBookID(borrowDTO.getBookId());  
 				
 		Borrowing borrow=new Borrowing(); 
-		if(!(book.getAvailableQuantity()>=1)) {
+		
+		if(loanrepo.existsById(borrowDTO.getUserId())==true) {
+			throw new NotFoundExp("Sorry, you can't borrow Book.Please pay fine first...");
+			
+		}
+		else if(!(book.getAvailableQuantity()>=1)) {
 			throw new NotFoundExp("Oops...Sorry, Currently this Book is not available...");
 		}
-		else if(resrepo.existsById(borrowDTO.getBookId()) && book.getAvailableQuantity()<=1) {
+		
+		else if(resrepo.existsById(borrowDTO.getBookId()) && book.getAvailableQuantity()<1) {
 			throw new NotFoundExp("Oops...Sorry,Book is reserved for someone...");
 		}
-		
+		else {
 		borrow.setBorrowingId(borrowDTO.getBorrowingId());
 		borrow.setBorrowDate(borrowDTO.getBorrowDate());
 		borrow.setDueDate(borrowDTO.getDueDate());
@@ -65,8 +76,11 @@ public class BorrowingServiceImpl implements IBorrowingService {
 		borrow.setBook(book);
 		
 		book.setAvailableQuantity(book.getAvailableQuantity()-1);
+		user.setAccountStatus("Active");
+	
 		
 		return borrowrepo.save(borrow);
+		}
 	}
 
 	@Override
@@ -76,10 +90,12 @@ public class BorrowingServiceImpl implements IBorrowingService {
 			throw new NotFoundExp("Borrower Id Not found...");
 		}
 		User user=userservice.getUserID(borrowDTO.getUserId());
-		
 		Book book=bookservice.getBookID(borrowDTO.getBookId());
+		
+		
 				
 		Borrowing borrow=new Borrowing(); 
+//		List<Book> book=borrow.getBook();
 		
 		borrow.setBorrowingId(borrowDTO.getBorrowingId());
 		borrow.setBorrowDate(borrowDTO.getBorrowDate());
@@ -94,17 +110,26 @@ public class BorrowingServiceImpl implements IBorrowingService {
 		
 		//if book returned after due date then perform following operation
 		
+		LoanManagement loan=new LoanManagement();
 		if(borrow.getReturnDate().isAfter(borrow.getDueDate())) {
 			
-			LoanManagement loan=new LoanManagement();
+			
 			loan.setUser(user);
 			loan.setBook(book);
 			loan.setFine(500.0);
+			loan.setStatus("Fined");
 			loan.setDueDate(borrow.getReturnDate().plusDays(5));
 			
 			loanrepo.save(loan);
 			message="You have return book after due date.Please pay fine"+loan.getFine()+" upto "+loan.getDueDate();
 			}
+		
+		Reports report=new Reports();
+		report.setFinesCollected(loan.getFine());
+		report.setUser(user);
+		report.setBook(book);
+		reportrepo.save(report);
+		
 		
 		return borrowrepo.save(borrow);
 		
@@ -119,8 +144,8 @@ public class BorrowingServiceImpl implements IBorrowingService {
 
 	@Override
 	public Borrowing getBorrowerId(long borrowingId) throws NotFoundExp {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return borrowrepo.findById(borrowingId).orElse(null);
 	}
 	
 	@Override
@@ -128,6 +153,7 @@ public class BorrowingServiceImpl implements IBorrowingService {
 		if(message!=null) {
 			return message;
 		}
-		return "";   }
+		return "";   
+		}
 	
 }

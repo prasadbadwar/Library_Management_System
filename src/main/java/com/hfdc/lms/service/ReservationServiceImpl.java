@@ -38,7 +38,7 @@ public class ReservationServiceImpl implements IReservationService{
 		
 		Book book=bookservice.getBookID(reserveDTO.getBookId());
 		
-		if(reserverepo.existsById(reserveDTO.getBookId()) || book.getAvailableQuantity()<1) {
+		if(book.getAvailableQuantity()<=1) {
 			throw new NotFoundExp("Oops...Sorry,Book is reserved for someone...");
 		}
 		
@@ -68,7 +68,7 @@ public class ReservationServiceImpl implements IReservationService{
 		reserve.setBook(book);
 		reserve.setReservationDate(reserveDTO.getReservationDate());
 		
-		
+		book.setAvailableQuantity(book.getAvailableQuantity()+1);
 		
 		return reserverepo.save(reserve);	
 		

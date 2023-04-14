@@ -1,12 +1,16 @@
 package com.hfdc.lms.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,17 +30,26 @@ public class Borrowing {
 	private long borrowingId;
 	
 	@OneToOne
-	@JoinColumn(name="user_id") //or can use maped by user_id
+	@JoinColumn(name="user_id")
+	@NotNull//or can use maped by user_id
 	private User user;			// (Foreign Key)
 	
-	@OneToOne
+//	@OneToMany(targetEntity = Book.class, cascade =CascadeType.ALL)
+//	@JoinColumn(name="book_id")
+//	@NotNull
+//	private Book book;	// (Foreign Key)
+	
+	@OneToOne(cascade =CascadeType.ALL)
 	@JoinColumn(name="book_id")
-	private Book book;			// (Foreign Key)
+	@NotNull
+	private Book book;	
 	
 	@Column(name="borrow_date")
+	@NotNull
 	private LocalDate borrowDate;
 	
 	@Column(name="due_date")
+	@NotNull
 	private LocalDate dueDate;
 	
 	@Column(name="return_date")

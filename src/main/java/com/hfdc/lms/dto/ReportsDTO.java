@@ -1,5 +1,7 @@
 package com.hfdc.lms.dto;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +14,10 @@ import lombok.Setter;
 public class ReportsDTO {
 	
 	private long reportId;
-	private String userActivity;
-	private String bookStatus;
+	@NotNull
+	private long userId;
+	@NotNull
+	private long bookId;
 	private Double finesCollected;
 
 }

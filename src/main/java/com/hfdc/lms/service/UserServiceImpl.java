@@ -18,17 +18,18 @@ public class UserServiceImpl implements IUserService {
 	IUserRepository userrepo;
 	@Override
 	public User addUser(UserDTO userDTO) throws UserNotFound {
-		if(userrepo.existsById(userDTO.getUserId())) {
-			throw new UserNotFound("User Already Exist!");
+		if(userrepo.existsByEmail(userDTO.getEmail())) {
+			throw new UserNotFound("User with this Email-id alredy registered!");
 			
 		}
 		User user=new User();
-		user.setAccountStatus(userDTO.getAccountStatus());
+//		user.setAccountStatus(userDTO.getAccountStatus());
 		user.setEmail(userDTO.getEmail());
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
 		user.setPassword(userDTO.getPassword());
 		user.setUserId(userDTO.getUserId());
+		user.setAccountStatus("Inactive");
 		
 		return userrepo.save(user);
 	}
@@ -38,8 +39,12 @@ public class UserServiceImpl implements IUserService {
 		if(!userrepo.existsById(userDTO.getUserId())) {
 			throw new UserNotFound("Oops...Sorry,User not found");
 		}
+		else if(userrepo.existsByEmail(userDTO.getEmail())) {
+			throw new UserNotFound("User with this Email-id alredy registered!");
+			
+		}
 		User user=new User();
-		user.setAccountStatus(userDTO.getAccountStatus());
+//		user.setAccountStatus(userDTO.getAccountStatus());
 		user.setEmail(userDTO.getEmail());
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,13 +31,16 @@ public class Reservation {
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
+	@NotNull
 	private User user;// (Foreign Key)
 	
 	@OneToOne
 	@JoinColumn(name="book_id")
+	@NotNull
 	private Book book; //(Foreign Key)
 	
 	@Column(name="reservation_date")
+	@NotNull
 	private LocalDate reservationDate;
 
 }

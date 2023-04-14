@@ -2,6 +2,8 @@ package com.hfdc.lms.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +29,13 @@ public class BookRestController {
 	IBookService service;
 	
 	@PostMapping("/addbook")
-	public ResponseEntity<String> addBook(@RequestBody BookDTO bookDTO) throws BookNotFound {
+	public ResponseEntity<String> addBook(@Valid @RequestBody BookDTO bookDTO) throws BookNotFound {
 		service.addBook(bookDTO); 
 		return new ResponseEntity<String>("Book Added Successfully!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updatebook")
-	public ResponseEntity<String> updateBook(@RequestBody BookDTO bookDTO) throws BookNotFound {
+	public ResponseEntity<String> updateBook(@Valid @RequestBody BookDTO bookDTO) throws BookNotFound {
 		 service.updateBook(bookDTO);
 		 return new ResponseEntity<String>("Book Updated Successfully!!",HttpStatus.OK);
 	}

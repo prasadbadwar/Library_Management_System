@@ -2,6 +2,8 @@ package com.hfdc.lms.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +31,13 @@ public class ReservationRestController {
 	IReservationService service;
 	
 	@PostMapping("/reservebook")
-	public ResponseEntity<String> ReserveBook(@RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound, NotFoundExp{
+	public ResponseEntity<String> ReserveBook(@Valid @RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound, NotFoundExp{
 		service.ReserveBook(reserveDTO);
 		return new ResponseEntity<String>("Book Reserved !!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updatereservation")
-	public ResponseEntity<String> updateReservation(@RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound,NotFoundExp {
+	public ResponseEntity<String> updateReservation(@Valid @RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound,NotFoundExp {
 		service.updateReservation(reserveDTO);
 		return new ResponseEntity<String>("Book Reserved Status Updated !!!",HttpStatus.OK);
 	}

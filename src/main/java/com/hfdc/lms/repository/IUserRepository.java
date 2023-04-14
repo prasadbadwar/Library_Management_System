@@ -7,5 +7,7 @@ import com.hfdc.lms.entity.User;
 
 @Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
-
+	
+	public Boolean existsByEmail(String email);
+	
 }
