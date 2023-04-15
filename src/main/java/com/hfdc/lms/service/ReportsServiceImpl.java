@@ -19,14 +19,14 @@ public class ReportsServiceImpl implements IReportsService {
 	IReportsRepository reprepo;
 	
 	@Autowired 
-	ILoanManagementRepository loanservice;
+	IBorrowingService borrowservice;
 
 	@Autowired
 	IUserService userService;
 	@Override
-	public Reports getReports(long id) throws UserNotFound{
-//		User user=userService.getUserID(id);
-//		Borrowing borrow=new Borrowing();
+	public List<Reports> getReports(long id) throws UserNotFound{
+		User user=userService.getUserID(id);
+
 //		borrow.getUser().getUserId();
 //		borrow.getUser().getUserId();
 //		borrow.getBook();
@@ -41,14 +41,14 @@ public class ReportsServiceImpl implements IReportsService {
 //		
 //		LoanManagement loan=loanservice.findByUserId(id);
 //		
-//		Reports reports=new Reports();
+		Reports reports=new Reports();  
 //		reports.setUser(borrow.getUser());
 //		reports.setBook(borrow.getBook());
 //		reports.setFinesCollected(loan.getFine());
 //		
 //		reprepo.save(reports);
 		
-		return reprepo.findById(id).get() ;
+		return reprepo.findByUser(user);
 		
 		
 	}

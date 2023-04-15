@@ -42,8 +42,8 @@ public class Reports {
 	@Column(name="fines_collected")
 	private double finesCollected;
 	
-//	@OneToOne(mappedBy = "user",fetch =FetchType.LAZY)
-//	private Borrowing borrow;
+	@OneToOne(mappedBy = "user",fetch =FetchType.LAZY)
+	private Borrowing borrow;
 	
 //	@OneToOne(mappedBy = "user",fetch =FetchType.EAGER,)
 //	private LoanManagement finesCollected;

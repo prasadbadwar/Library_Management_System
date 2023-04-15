@@ -16,11 +16,14 @@ import lombok.Setter;
 public class LoanManagementDTO {
 	
 	private long loanId;
+	
 	@NotNull
 	private long userId; //(Foreign Key)
+	
 	@NotNull
 	private long bookId; //(Foreign Key)
-	@NotNull
+	
+	
 	private LocalDate dueDate;
 	
 	private Double fine;

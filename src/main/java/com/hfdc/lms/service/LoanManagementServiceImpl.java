@@ -1,8 +1,10 @@
 package com.hfdc.lms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.support.ReflectivePropertyAccessor.OptimalPropertyAccessor;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -11,6 +13,7 @@ import com.hfdc.lms.entity.Book;
 import com.hfdc.lms.entity.LoanManagement;
 import com.hfdc.lms.entity.User;
 import com.hfdc.lms.exception.BookNotFound;
+import com.hfdc.lms.exception.NotFoundExp;
 import com.hfdc.lms.exception.UserNotFound;
 import com.hfdc.lms.repository.ILoanManagementRepository;
 
@@ -33,22 +36,27 @@ public class LoanManagementServiceImpl implements ILoanManagementService {
 	}
 
 	@Override
-	public LoanManagement updateLoan(LoanManagementDTO loanDTO) throws UserNotFound, BookNotFound,NotFoundException {
-		
-		if(!loanrepo.existsById(loanDTO.getLoanId())) {
-			throw new NotFoundException("User Id is not Present");
+	public LoanManagement updateLoan(LoanManagementDTO loanDTO) throws UserNotFound, BookNotFound,NotFoundExp {
+		Optional opt=loanrepo.findById(loanDTO.getLoanId());
+		if(opt.isPresent()) {
+			User user=userservice.getUserID(loanDTO.getUserId());
+			
+			Book book=bookservice.getBookID(loanDTO.getBookId());
+			LoanManagement loan=new LoanManagement();
+			loan.setLoanId(loanDTO.getLoanId());
+			loan.setUser(user);
+			loan.setBook(book);
+			loan.setFine(500.0);
+			loan.setDueDate(loanDTO.getDueDate());
+			loan.setStatus("Paid");
+			
+			return loanrepo.save(loan);
+			
 		}
-		User user=userservice.getUserID(loanDTO.getUserId());
+		else {
+			throw new NotFoundExp("Loan Id is not Present");
+		}
 		
-		Book book=bookservice.getBookID(loanDTO.getBookId());
-		LoanManagement loan=new LoanManagement();
-		loan.setLoanId(loanDTO.getLoanId());
-		loan.setUser(user);
-		loan.setBook(book);
-		loan.setFine(500.0);
-		loan.setStatus("Paid");
-		
-		return loanrepo.save(loan);
 	}
 
 }

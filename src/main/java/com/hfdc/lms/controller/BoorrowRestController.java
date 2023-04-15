@@ -52,7 +52,7 @@ public class BoorrowRestController {
 	}
 	
 	@GetMapping("/getBorrowers/{id}")
-	public Borrowing getData(@PathVariable long id) throws NotFoundExp{
+	public List<Borrowing> getData(@PathVariable long id) throws NotFoundExp,UserNotFound{
 		return service.getBorrowerId(id);
 	}
 	

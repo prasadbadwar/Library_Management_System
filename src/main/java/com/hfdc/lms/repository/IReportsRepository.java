@@ -13,6 +13,6 @@ import com.hfdc.lms.entity.User;
 @Repository
 public interface IReportsRepository extends JpaRepository<Reports, Long> {
 
-//	@Query("from Reports r where r.user=:user")
-//	public Reports findUser(@Param("user") User user);
+	
+	public List<Reports> findByUser(User user);
 }

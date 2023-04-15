@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -54,7 +55,9 @@ public class Book {
 	@NotNull
 	private int availableQuantity;
 	
-//	@OneToOne(mappedBy ="book",cascade = CascadeType.ALL )
+//	@OneToMany(cascade = CascadeType.ALL )
+//	@JoinColumn(name="book_id",referencedColumnName = "book_id")
 //	private Borrowing borrow;
+	
 
 }

@@ -20,7 +20,7 @@ public class ReportsController {
 	IReportsService service;
 	
 	@GetMapping("getUserReport/{id}")
-	public Reports getReports(@PathVariable long id) throws UserNotFound{
+	public List<Reports> getReports(@PathVariable long id) throws UserNotFound{
 		return service.getReports(id);
 	}
 }

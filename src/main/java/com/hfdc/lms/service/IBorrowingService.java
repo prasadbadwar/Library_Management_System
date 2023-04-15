@@ -16,7 +16,7 @@ public interface IBorrowingService {
 	
 	public List<Borrowing> getBorrower();
 	
-	public Borrowing getBorrowerId(long borrowingId) throws NotFoundExp;
+	public List<Borrowing> getBorrowerId(long borrowingId) throws NotFoundExp,UserNotFound;
 	
 	public String display();
 	

@@ -51,7 +51,7 @@ public class BorrowingServiceImpl implements IBorrowingService {
 		}
 		User user=userservice.getUserID(borrowDTO.getUserId());
 		
-		Book book=bookservice.getBookID(borrowDTO.getBookId());  
+		Book book= bookservice.getBookID(borrowDTO.getBookId()); 
 				
 		Borrowing borrow=new Borrowing(); 
 		
@@ -143,9 +143,11 @@ public class BorrowingServiceImpl implements IBorrowingService {
 	}
 
 	@Override
-	public Borrowing getBorrowerId(long borrowingId) throws NotFoundExp {
+	public List<Borrowing> getBorrowerId(long borrowingId) throws NotFoundExp, UserNotFound {
 		
-		return borrowrepo.findById(borrowingId).orElse(null);
+		User user=userservice.getUserID(borrowingId);
+		
+		return borrowrepo.findByUser(user);
 	}
 	
 	@Override

@@ -2,6 +2,8 @@ package com.hfdc.lms.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.webjars.NotFoundException;
 import com.hfdc.lms.dto.LoanManagementDTO;
 import com.hfdc.lms.entity.LoanManagement;
 import com.hfdc.lms.exception.BookNotFound;
+import com.hfdc.lms.exception.NotFoundExp;
 import com.hfdc.lms.exception.UserNotFound;
 import com.hfdc.lms.service.ILoanManagementService;
 
@@ -33,7 +36,7 @@ public class LoanRestController {
 	
 	
 	@PutMapping("/payfine")
-	public ResponseEntity<String> updateLoan(@RequestBody LoanManagementDTO loanDTO) throws UserNotFound, BookNotFound,NotFoundException{
+	public ResponseEntity<String> updateLoan(@Valid @RequestBody LoanManagementDTO loanDTO) throws UserNotFound, BookNotFound,NotFoundExp{
 		service.updateLoan(loanDTO);
 		return new ResponseEntity<String>("User Paid Fine successfully!",HttpStatus.OK);
 	}
