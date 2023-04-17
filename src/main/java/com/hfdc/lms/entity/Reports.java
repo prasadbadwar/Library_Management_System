@@ -1,16 +1,20 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 04/04/2023
+  * 
+  * @Description : Reports entity class.
+  * ==========================
+  * */
 package com.hfdc.lms.entity;
-
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -42,8 +46,8 @@ public class Reports {
 	@Column(name="fines_collected")
 	private double finesCollected;
 	
-	@OneToOne(mappedBy = "user",fetch =FetchType.LAZY)
-	private Borrowing borrow;
+//	@OneToOne(mappedBy = "user",fetch =FetchType.LAZY)
+//	private List<Borrowing> borrow;
 	
 //	@OneToOne(mappedBy = "user",fetch =FetchType.EAGER,)
 //	private LoanManagement finesCollected;

@@ -1,3 +1,11 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 06/04/2023
+  * 
+  * @Description : Rest Controller class for Reservation of the books.
+  * ==========================
+  * */
 package com.hfdc.lms.controller;
 
 import java.util.List;
@@ -31,33 +39,33 @@ public class BookRestController {
 	@PostMapping("/addbook")
 	public ResponseEntity<String> addBook(@Valid @RequestBody BookDTO bookDTO) throws BookNotFound {
 		service.addBook(bookDTO); 
-		return new ResponseEntity<String>("Book Added Successfully!!",HttpStatus.OK);
+		return new ResponseEntity<>("Book Added Successfully!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updatebook")
 	public ResponseEntity<String> updateBook(@Valid @RequestBody BookDTO bookDTO) throws BookNotFound {
 		 service.updateBook(bookDTO);
-		 return new ResponseEntity<String>("Book Updated Successfully!!",HttpStatus.OK);
+		 return new ResponseEntity<>("Book Updated Successfully!!",HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/deletebook/{bookId}")
 	public ResponseEntity<String> deleteBook(@PathVariable long bookId) throws BookNotFound{
 		service.deleteBook(bookId);
-		return new ResponseEntity<String>("Book Deleted Successfully!!!",HttpStatus.OK);
+		return new ResponseEntity<>("Book Deleted Successfully!!!",HttpStatus.OK);
 	}
 	
 	@GetMapping("/findtitle/{title}")
 	public ResponseEntity<List<Book>> findByTitle(@PathVariable String title) throws BookNotFound{
-		List list=service.findByTitle(title);
+		List<Book> list=service.findByTitle(title);
 		if(list.isEmpty()) {
 			throw new BookNotFound("Oops...Sorry,Book not found");
 		}
-		return new ResponseEntity<List<Book>>(list,HttpStatus.OK);
+		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	@GetMapping("/findauthor/{author}")
 	public List<Book> findByAuthor(@PathVariable String author) throws BookNotFound{
-		List list=service.findByAuthor(author);
+		List<Book> list=service.findByAuthor(author);
 		if(list.isEmpty()) {
 			throw new BookNotFound("Oops...Sorry,Book not found");
 		}
@@ -67,7 +75,7 @@ public class BookRestController {
 	
 	@GetMapping("/findsubject/{subject}")
 	public List<Book> findBySubject(@PathVariable String subject) throws BookNotFound{
-		List list= service.findBySubject(subject);
+		List<Book> list= service.findBySubject(subject);
 		if(list.isEmpty()) {
 			throw new BookNotFound("Oops...Sorry,No Book not found with Subject "+subject);
 		}
@@ -81,7 +89,7 @@ public class BookRestController {
 	
 	@GetMapping("/getbyTAS/{query}")
 	public List<Book> findByTAS(@PathVariable String query) throws BookNotFound{
-		List list= service.findByTAS(query);
+		List<Book> list= service.findByTAS(query);
 		if(list.isEmpty()) {
 			throw new BookNotFound("Oops...Sorry,No Book not found with "+query);
 		}

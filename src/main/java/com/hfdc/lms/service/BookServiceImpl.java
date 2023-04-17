@@ -1,3 +1,11 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 06/04/2023
+  * 
+  * @Description : Implementation of IBookService methods.
+  * ==========================
+  * */
 package com.hfdc.lms.service;
 
 import java.util.List;
@@ -61,7 +69,7 @@ public class BookServiceImpl implements IBookService {
 	public void deleteBook(long bookId) throws BookNotFound {
 		
 		if(!bookrepo.existsById(bookId)) {
-			throw new BookNotFound("Oops...Sorry,Book not found");
+			throw new BookNotFound("Oops...Sorry,Book ID not found");
 		}
 		
 		bookrepo.deleteById(bookId);
@@ -72,7 +80,7 @@ public class BookServiceImpl implements IBookService {
 	public List<Book> findByTitle(String title) throws BookNotFound {
 		
 		if(bookrepo.findByTitle(title)==null) {
-			throw new BookNotFound("Oops...Sorry,Book not found");
+			throw new BookNotFound("Oops...Sorry,Book with given Title not found");
 		}
 		return bookrepo.findByTitle(title);
 	}
@@ -81,7 +89,7 @@ public class BookServiceImpl implements IBookService {
 	public List<Book> findByAuthor(String author) throws BookNotFound {
 		
 		if(bookrepo.findByAuthor(author)==null) {
-			throw new BookNotFound("Oops...Sorry,Book not found");
+			throw new BookNotFound("Oops...Sorry,Book with given author not found");
 		}
 		return bookrepo.findByAuthor(author);
 	}
@@ -90,7 +98,7 @@ public class BookServiceImpl implements IBookService {
 	public List<Book> findBySubject(String subject) throws BookNotFound {
 		
 		if(bookrepo.findBySubject(subject)==null) {
-			throw new BookNotFound("Oops...Sorry,Book not found");
+			throw new BookNotFound("Oops...Sorry,Book with given subject not found");
 		}
 		return bookrepo.findBySubject(subject);
 	}
@@ -112,7 +120,7 @@ public class BookServiceImpl implements IBookService {
 	@Override
 	public Book getBookID(long bookId) throws BookNotFound {
 		if(!bookrepo.existsById(bookId)) {
-			throw new BookNotFound("Oops...Sorry,Book not found");
+			throw new BookNotFound("Oops...Sorry,Given Book Id not found");
 		}
 		
 		return bookrepo.findById(bookId).orElse(null);

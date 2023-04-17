@@ -1,3 +1,11 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 04/04/2023
+  * 
+  * @Description : IBookService is an interface which hold all services related to book management. Book controller can access book services through this interface class.
+  * ==========================
+  * */
 package com.hfdc.lms.service;
 
 import java.util.List;

@@ -9,14 +9,8 @@ import com.hfdc.lms.service.IUserService;
 @SpringBootTest
 class LibraryManagementSystemApplicationTests {
 
-	@Autowired
-	IUserService userservice;
+	
 	@Test
 	void contextLoads() {
-	}
-
-	@Test
-	void User() {
-		
 	}
 }

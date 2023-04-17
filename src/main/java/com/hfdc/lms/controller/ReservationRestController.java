@@ -1,3 +1,16 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 10/04/2023
+  * 
+  * @Description : Rest Controller class for Reservation of the books.
+  * ==========================
+  * */
+
+
+
+
+
 package com.hfdc.lms.controller;
 
 import java.util.List;
@@ -31,25 +44,25 @@ public class ReservationRestController {
 	IReservationService service;
 	
 	@PostMapping("/reservebook")
-	public ResponseEntity<String> ReserveBook(@Valid @RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound, NotFoundExp{
-		service.ReserveBook(reserveDTO);
-		return new ResponseEntity<String>("Book Reserved !!!",HttpStatus.OK);
+	public ResponseEntity<String> reserveBook(@Valid @RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound, NotFoundExp{
+		service.reserveBook(reserveDTO);
+		return new ResponseEntity<>("Book Reserved !!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updatereservation")
 	public ResponseEntity<String> updateReservation(@Valid @RequestBody ReservationDTO reserveDTO) throws UserNotFound,BookNotFound,NotFoundExp {
 		service.updateReservation(reserveDTO);
-		return new ResponseEntity<String>("Book Reserved Status Updated !!!",HttpStatus.OK);
+		return new ResponseEntity<>("Book Reserved Status Updated !!!",HttpStatus.OK);
 	}
 	
 	@GetMapping("/getallreservation")
-	public List<Reservation> AllReservations(){
-		return service.AllReservations();
+	public List<Reservation> allReservations(){
+		return service.allReservations();
 	}
 	
 	@DeleteMapping("/deletereservation/{reserveId}")
 	public ResponseEntity<String> delete(@PathVariable long reserveId){
 		service.deleteReservation(reserveId);
-		return new ResponseEntity<String>("Reservation Deleted Successfully !!!",HttpStatus.OK);
+		return new ResponseEntity<>("Reservation Deleted Successfully !!!",HttpStatus.OK);
 	}
 }

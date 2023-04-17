@@ -1,3 +1,11 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 04/04/2023
+  * 
+  * @Description : IBookRepository is an interface which extends JpaRepository for connecting with Book table of library database.
+  * ==========================
+  * */
 package com.hfdc.lms.repository;
 
 import java.util.List;
@@ -16,7 +24,7 @@ public interface IBookRepository extends JpaRepository<Book, Long> {
 	
 	public List<Book> findByAuthor(String author);
 	
-	public List<Book> findBySubject(String Subject);
+	public List<Book> findBySubject(String subject);
 	
 	
 	@Query("from Book where title=:query OR author=:query OR subject=:query")

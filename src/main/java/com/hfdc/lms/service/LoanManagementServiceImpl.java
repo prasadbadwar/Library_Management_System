@@ -1,12 +1,18 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 08/04/2023
+  * 
+  * @Description : Implementation of ILoanManagementService methods.
+  * ==========================
+  * */
 package com.hfdc.lms.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.support.ReflectivePropertyAccessor.OptimalPropertyAccessor;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
 import com.hfdc.lms.dto.LoanManagementDTO;
 import com.hfdc.lms.entity.Book;
@@ -37,7 +43,7 @@ public class LoanManagementServiceImpl implements ILoanManagementService {
 
 	@Override
 	public LoanManagement updateLoan(LoanManagementDTO loanDTO) throws UserNotFound, BookNotFound,NotFoundExp {
-		Optional opt=loanrepo.findById(loanDTO.getLoanId());
+		Optional<LoanManagement> opt=loanrepo.findById(loanDTO.getLoanId());
 		if(opt.isPresent()) {
 			User user=userservice.getUserID(loanDTO.getUserId());
 			

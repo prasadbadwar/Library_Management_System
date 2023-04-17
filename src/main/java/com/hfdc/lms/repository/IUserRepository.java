@@ -1,3 +1,11 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 04/04/2023
+  * 
+  * @Description : IUserRepository is an interface which extends JpaRepository for connecting with users table of library database.
+  * ==========================
+  * */
 package com.hfdc.lms.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

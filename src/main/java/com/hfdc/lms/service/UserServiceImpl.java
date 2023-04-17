@@ -1,3 +1,11 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 06/04/2023
+  * 
+  * @Description : Implementation of IUserService methods.
+  * ==========================
+  * */
 package com.hfdc.lms.service;
 
 import java.util.List;
@@ -7,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.hfdc.lms.dto.UserDTO;
 import com.hfdc.lms.entity.User;
-import com.hfdc.lms.exception.BookNotFound;
 import com.hfdc.lms.exception.UserNotFound;
 import com.hfdc.lms.repository.IUserRepository;
 
@@ -23,7 +30,6 @@ public class UserServiceImpl implements IUserService {
 			
 		}
 		User user=new User();
-//		user.setAccountStatus(userDTO.getAccountStatus());
 		user.setEmail(userDTO.getEmail());
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
@@ -39,17 +45,17 @@ public class UserServiceImpl implements IUserService {
 		if(!userrepo.existsById(userDTO.getUserId())) {
 			throw new UserNotFound("Oops...Sorry,User not found");
 		}
-		else if(userrepo.existsByEmail(userDTO.getEmail())) {
-			throw new UserNotFound("User with this Email-id alredy registered!");
+		else if(!userrepo.existsByEmail(userDTO.getEmail())) {
+			throw new UserNotFound("User with this Email-id not found!");
 			
 		}
-		User user=new User();
-//		user.setAccountStatus(userDTO.getAccountStatus());
+		User user=userrepo.findById(userDTO.getUserId()).orElse(null);
 		user.setEmail(userDTO.getEmail());
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
 		user.setPassword(userDTO.getPassword());
 		user.setUserId(userDTO.getUserId());
+		user.setAccountStatus(user.getAccountStatus());
 		
 		return userrepo.save(user);
 	}
@@ -64,7 +70,7 @@ public class UserServiceImpl implements IUserService {
 	public void deleteUser(long userId) throws UserNotFound {
 
 		if(!userrepo.existsById(userId)) {
-			throw new UserNotFound("Oops...Sorry,User not found");
+			throw new UserNotFound("Oops...Sorry,User not found with given Id");
 		}
 		
 		userrepo.deleteById(userId);
@@ -74,7 +80,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserID(long userId) throws UserNotFound {
 		if(!userrepo.existsById(userId)) {
-			throw new UserNotFound("Oops...Sorry,User not found");
+			throw new UserNotFound("Oops...Sorry,User Id not found");
 		}
 		return userrepo.findById(userId).orElse(null);
 	}

@@ -1,3 +1,11 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 08/04/2023
+  * 
+  * @Description : This class is for getting the information of fined students and pay fine.
+  * ==========================
+  * */
 package com.hfdc.lms.controller;
 
 import java.util.List;
@@ -11,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.webjars.NotFoundException;
 
 import com.hfdc.lms.dto.LoanManagementDTO;
 import com.hfdc.lms.entity.LoanManagement;
@@ -38,6 +45,6 @@ public class LoanRestController {
 	@PutMapping("/payfine")
 	public ResponseEntity<String> updateLoan(@Valid @RequestBody LoanManagementDTO loanDTO) throws UserNotFound, BookNotFound,NotFoundExp{
 		service.updateLoan(loanDTO);
-		return new ResponseEntity<String>("User Paid Fine successfully!",HttpStatus.OK);
+		return new ResponseEntity<>("User Paid Fine successfully!",HttpStatus.OK);
 	}
 }

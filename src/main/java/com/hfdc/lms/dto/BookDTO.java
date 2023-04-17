@@ -1,3 +1,11 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 04/04/2023
+  * 
+  * @Description : DTO class for Book entity.
+  * ==========================
+  * */
 package com.hfdc.lms.dto;
 
 import java.time.LocalDate;

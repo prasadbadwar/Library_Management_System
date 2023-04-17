@@ -1,3 +1,11 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 04/04/2023
+  * 
+  * @Description : LoanManagement/fine management class.
+  * ==========================
+  * */
 package com.hfdc.lms.entity;
 
 import java.time.LocalDate;

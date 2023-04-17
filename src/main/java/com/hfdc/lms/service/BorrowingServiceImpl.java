@@ -1,3 +1,11 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 08/04/2023
+  * 
+  * @Description : Implementation of IBorrowingService methods.
+  * ==========================
+  * */
 package com.hfdc.lms.service;
 
 import java.util.List;
@@ -55,11 +63,11 @@ public class BorrowingServiceImpl implements IBorrowingService {
 				
 		Borrowing borrow=new Borrowing(); 
 		
-		if(loanrepo.existsById(borrowDTO.getUserId())==true) {
+		if(loanrepo.findByUser(user)!=null) {
 			throw new NotFoundExp("Sorry, you can't borrow Book.Please pay fine first...");
 			
 		}
-		else if(!(book.getAvailableQuantity()>=1)) {
+		else if(book.getAvailableQuantity()<=1) {
 			throw new NotFoundExp("Oops...Sorry, Currently this Book is not available...");
 		}
 		
@@ -94,9 +102,7 @@ public class BorrowingServiceImpl implements IBorrowingService {
 		
 		
 				
-		Borrowing borrow=new Borrowing(); 
-//		List<Book> book=borrow.getBook();
-		
+		Borrowing borrow=new Borrowing(); 		
 		borrow.setBorrowingId(borrowDTO.getBorrowingId());
 		borrow.setBorrowDate(borrowDTO.getBorrowDate());
 		borrow.setDueDate(borrowDTO.getDueDate());

@@ -1,3 +1,11 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 04/04/2023
+  * 
+  * @Description : IUserService is an interface which hold all services related to users. User controller can access user services through this interface class.
+  * ==========================
+  * */
 package com.hfdc.lms.service;
 
 import java.util.List;

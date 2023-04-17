@@ -1,9 +1,16 @@
+/* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 10/04/2023
+  * 
+  * @Description : Implementation of IReservationService methods.
+  * ==========================
+  * */
 package com.hfdc.lms.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -32,7 +39,7 @@ public class ReservationServiceImpl implements IReservationService{
 
 	
 	@Override
-	public Reservation ReserveBook(ReservationDTO reserveDTO) throws UserNotFound, BookNotFound,NotFoundExp {
+	public Reservation reserveBook(ReservationDTO reserveDTO) throws UserNotFound, BookNotFound,NotFoundExp {
 		
 		User user=userservice.getUserID(reserveDTO.getUserId());
 		
@@ -75,7 +82,7 @@ public class ReservationServiceImpl implements IReservationService{
 	}
 
 	@Override
-	public List<Reservation> AllReservations() {
+	public List<Reservation> allReservations() {
 		
 		return reserverepo.findAll();
 	}

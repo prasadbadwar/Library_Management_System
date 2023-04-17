@@ -1,3 +1,11 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 08/04/2023
+  * 
+  * @Description : This class represents Borrowers methods like add, update, delete, search borrower information. This class handle borrowing status of user. 
+  * ==========================
+  * */
 package com.hfdc.lms.controller;
 
 import java.util.List;
@@ -17,12 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hfdc.lms.dto.BorrowingDTO;
 import com.hfdc.lms.entity.Borrowing;
-import com.hfdc.lms.entity.LoanManagement;
 import com.hfdc.lms.exception.BookNotFound;
 import com.hfdc.lms.exception.NotFoundExp;
 import com.hfdc.lms.exception.UserNotFound;
 import com.hfdc.lms.service.IBorrowingService;
-import com.hfdc.lms.service.ILoanManagementService;
 
 @RestController
 @RequestMapping("/lms/borrow")
@@ -35,14 +41,14 @@ public class BoorrowRestController {
 	@PostMapping("/boorrowbook")
 	public ResponseEntity<String> addBorrower(@Valid @RequestBody BorrowingDTO borrowDTO) throws NotFoundExp, UserNotFound,BookNotFound{
 		service.addBorrower(borrowDTO);
-		return new ResponseEntity<String>("User Borrowed Book Successfully!!",HttpStatus.OK);
+		return new ResponseEntity<>("User Borrowed Book Successfully!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/returnbook")
 	public ResponseEntity<String> updateBorrower(@Valid @RequestBody BorrowingDTO borrowDTO) throws NotFoundExp, UserNotFound,BookNotFound{
 		service.updateBorrower(borrowDTO);
 		String message=service.display();
-		return new ResponseEntity<String>("User Returned Book Successfully!!"+message,HttpStatus.OK);
+		return new ResponseEntity<>("User Returned Book Successfully!!"+message,HttpStatus.OK);
 		
 	}
 	

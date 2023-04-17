@@ -1,3 +1,11 @@
+ /* =========================
+  * @Author : Er.Prasad B.Badwar.
+  * 
+  * @Date : 06/04/2023
+  * 
+  * @Description : User Rest Controller handles the operation of user like addUser,updateUser,deleteUser and get users information
+  * ==========================
+  * */
 package com.hfdc.lms.controller;
 
 import java.util.List;
@@ -31,13 +39,13 @@ public class UserRestController {
 	@PostMapping("/adduser")
 	public ResponseEntity<String> addUser(@Valid @RequestBody UserDTO userDTO) throws UserNotFound {
 		service.addUser(userDTO);
-		return new ResponseEntity<String>("User Added Successfully!!",HttpStatus.OK);
+		return new ResponseEntity<>("User Added Successfully!!",HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateuser")
 	public ResponseEntity<String> updateUser(@Valid @RequestBody UserDTO userDTO)throws UserNotFound {
 		service.updateUser(userDTO);
-		return new ResponseEntity<String>("User Updated Successfully!!",HttpStatus.OK);
+		return new ResponseEntity<>("User Updated Successfully!!",HttpStatus.OK);
 	}
 	
 	@GetMapping("/getusers")
@@ -49,7 +57,7 @@ public class UserRestController {
 	@DeleteMapping("/deleteuser/{userId}")
 	public ResponseEntity<String> deleteUser(@PathVariable long userId) throws UserNotFound{
 		service.deleteUser(userId);
-		return new ResponseEntity<String>("User Deleted Successfully!!!",HttpStatus.OK);
+		return new ResponseEntity<>("User Deleted Successfully!!!",HttpStatus.OK);
 	}
 	
 	@GetMapping("/getuserid/{userId}")
