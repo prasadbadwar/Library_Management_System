@@ -26,7 +26,7 @@ public class UserDTO {
 	private long userId;
 	@NotNull
 	private String firstName;
-	@NotNull
+	@NotEmpty
 	private String lastName;
 	
 	@Email(message = "Email should be valid")

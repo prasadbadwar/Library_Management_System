@@ -40,12 +40,7 @@ public class Borrowing {
 	@JoinColumn(name="user_id")
 	@NotNull//or can use maped by user_id
 	private User user;			// (Foreign Key)
-	
-//	@OneToMany(targetEntity = Book.class, cascade =CascadeType.ALL)
-//	@JoinColumn(name="book_id")
-//	@NotNull
-//	private Book book;	// (Foreign Key)
-	
+		
 	@ManyToOne(targetEntity = Book.class,fetch = FetchType.EAGER)
 	@JoinColumn(name="book_id")
 	@NotNull

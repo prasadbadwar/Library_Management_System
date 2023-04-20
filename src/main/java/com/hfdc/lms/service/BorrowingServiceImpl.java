@@ -63,11 +63,11 @@ public class BorrowingServiceImpl implements IBorrowingService {
 				
 		Borrowing borrow=new Borrowing(); 
 		
-		if(loanrepo.findByUser(user)!=null) {
+		if(loanrepo.findFinedUser(user)!=null) {
 			throw new NotFoundExp("Sorry, you can't borrow Book.Please pay fine first...");
 			
 		}
-		else if(book.getAvailableQuantity()<=1) {
+		else if(book.getAvailableQuantity()<1) {
 			throw new NotFoundExp("Oops...Sorry, Currently this Book is not available...");
 		}
 		
@@ -131,7 +131,9 @@ public class BorrowingServiceImpl implements IBorrowingService {
 			}
 		
 		Reports report=new Reports();
-		report.setFinesCollected(loan.getFine());
+		double fine=0;
+		if(loan.getFine()==null) {fine=0;}else {fine=loan.getFine();}
+		report.setFinesCollected(fine);
 		report.setUser(user);
 		report.setBook(book);
 		reportrepo.save(report);

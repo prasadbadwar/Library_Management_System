@@ -20,6 +20,11 @@ repositories {
 }
 
 dependencies {
+
+	// https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
+	implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.10.3'
+	//grafana dependency
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	//swagger dependecy
 		// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.8'

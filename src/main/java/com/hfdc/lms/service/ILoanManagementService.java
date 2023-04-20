@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hfdc.lms.dto.LoanManagementDTO;
 import com.hfdc.lms.entity.LoanManagement;
-import com.hfdc.lms.exception.BookNotFound;
 import com.hfdc.lms.exception.NotFoundExp;
 import com.hfdc.lms.exception.UserNotFound;
 
@@ -23,6 +21,8 @@ public interface ILoanManagementService {
 	
 	public List<LoanManagement> getLoanData();
 	
-	public LoanManagement updateLoan(LoanManagementDTO loanDTO) throws UserNotFound,BookNotFound,NotFoundExp;
+	public int updateLoan(long loanid) throws NotFoundExp;
+	
+	public List<LoanManagement> findByUser(long userid)  throws UserNotFound;
 	
 }

@@ -56,11 +56,6 @@ public class Book {
 	
 	@Column(name="available_quantity")
 	@NotNull
-	private int availableQuantity;
-	
-//	@OneToMany(cascade = CascadeType.ALL )
-//	@JoinColumn(name="book_id",referencedColumnName = "book_id")
-//	private Borrowing borrow;
-	
+	private int availableQuantity;	
 
 }

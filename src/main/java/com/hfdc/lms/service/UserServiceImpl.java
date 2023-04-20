@@ -49,13 +49,19 @@ public class UserServiceImpl implements IUserService {
 			throw new UserNotFound("User with this Email-id not found!");
 			
 		}
+		
 		User user=userrepo.findById(userDTO.getUserId()).orElse(null);
+		if(user==null) {
+			throw new NullPointerException("Null user");
+		}
 		user.setEmail(userDTO.getEmail());
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
 		user.setPassword(userDTO.getPassword());
 		user.setUserId(userDTO.getUserId());
 		user.setAccountStatus(user.getAccountStatus());
+		
+
 		
 		return userrepo.save(user);
 	}

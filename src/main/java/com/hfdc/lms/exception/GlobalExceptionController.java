@@ -8,8 +8,12 @@
   * */
 package com.hfdc.lms.exception;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -36,6 +40,11 @@ public class GlobalExceptionController {
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<String> handleValidationExp(MethodArgumentNotValidException e){
-		return new ResponseEntity<>(e.getBindingResult().getFieldError().getDefaultMessage(),HttpStatus.BAD_REQUEST);
+		List<String> details = new ArrayList<>();
+        for(ObjectError error : e.getBindingResult().getAllErrors()) {
+            details.add(error.getDefaultMessage());
+        }
+        String error = details.toString();
+		return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST); 
 	}
 }
