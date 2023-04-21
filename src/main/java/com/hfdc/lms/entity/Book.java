@@ -24,7 +24,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-
 @Entity
 public class Book {
 	

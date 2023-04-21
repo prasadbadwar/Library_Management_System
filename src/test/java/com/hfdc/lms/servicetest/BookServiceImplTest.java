@@ -8,35 +8,34 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hfdc.lms.entity.Book;
 import com.hfdc.lms.exception.BookNotFound;
 import com.hfdc.lms.service.IBookService;
 
+@SpringBootTest
 class BookServiceImplTest {
 	
 	@Autowired
 	IBookService service;
 	@Test
 	void testFindByTitle() throws BookNotFound {
-//		fail("Not yet implemented");
 		List<Book> li=service.findByTitle("Java");
 		assertTrue(li.size()>=1);
 	}
-//
-//	@Test
-//	void testFindByAuthor() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testFindBySubject() {
-//		fail("Not yet implemented");
-//	}
+
+	@Test
+	void testFindByAuthor() throws BookNotFound {
+
+		List<Book> li=service.findByTitle("Javeed Sir");
+		assertTrue(li.size()>=1);
+	}
+	
 
 	@Test
 	void testGetBooks() {
-//		fail("Not yet implemented");
+
 		
 		List<Book> li=service.getBooks();
 		assertNotNull(li);
@@ -46,7 +45,6 @@ class BookServiceImplTest {
 
 	@Test
 	void testFindByTAS() throws BookNotFound {
-//		fail("Not yet implemented");
 		List<Book> li=service.findByTAS("Biology");
 		assertTrue(li.size()>=1);
 	}
